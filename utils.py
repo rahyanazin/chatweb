@@ -97,7 +97,8 @@ def get_url_vector_store(url):
 
     vectordb = Chroma(
         collection_name=url_collection_name,
-        persist_directory=settings.VECTORSTORE_PERSISTENT_DIRECTORY
+        persist_directory=settings.VECTORSTORE_PERSISTENT_DIRECTORY,
+        embedding_function=OpenAIEmbeddings()
     )
 
     # I wasnt sure if I was getting exactly only the documents of the given collection name
