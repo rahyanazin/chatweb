@@ -2,7 +2,7 @@ from fastapi import FastAPI, Form
 
 from typing import Optional
 
-import uuid
+import chat
 
 app = FastAPI()
 
@@ -10,13 +10,13 @@ app = FastAPI()
 @app.get("/create-session")
 def create_session() -> str:
 
-    return uuid.uuid4().hex
+    return chat.create_session()
 
 
 @app.post("/index")
 def index(url: str = Form(default="")):
 
-    return url
+    return chat.index(url)
 
 
 @app.post('/ask')
@@ -25,4 +25,6 @@ def ask(
     query: str = Form(default=""),
     session_id: Optional[str] = Form(default="")
 ):
-    return f"answer for question '{query}' about url '{url}' in session '{session_id}'"
+
+    return chat.ask(url, query, session_id)
+
