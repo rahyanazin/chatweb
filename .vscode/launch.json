@@ -11,6 +11,15 @@
             "cwd": "${workspaceRoot}",
             "env": { "PYTHONPATH": "${workspaceRoot}"},
             "justMyCode": false,
+        },
+        {
+            "name": "Streamlit Debug from UI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "justMyCode": true,
+            "cwd": "${fileDirname}",
+            "args": ["run", "./app.py"]
         }
     ]
 }
