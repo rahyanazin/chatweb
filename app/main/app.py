@@ -1,8 +1,7 @@
-import random
 
 import streamlit as st
 
-import chat
+from main import chat
 
 
 def initialize_states():
@@ -16,25 +15,13 @@ def initialize_states():
         st.session_state.chat_history = []
 
 
-def get_random_value():
-
-    return random.randint(0, 100)
-
-
-def submit_url():
-
-    st.session_state.url = st.session_state.widget
-
-    st.session_state.widget = ''
-
-
 def on_url_changed():
 
     url = st.session_state.url_input
 
     st.session_state.url = url
 
-    st.session_state.chat_session_id = chat.generate_session_id()
+    st.session_state.chat_session_id = chat.create_session()
 
     chat.index(url)
 
@@ -43,15 +30,6 @@ def on_url_changed():
     ]
 
     st.session_state.url_input = None
-
-
-def on_clear():
-
-    url = st.session_state.url
-
-    st.session_state.chat_history = [
-        {"role": "assistant", "content": f"The content of website '{url}' has been loaded. How can I help you?"},
-    ]
 
 
 def url_input():
@@ -68,22 +46,22 @@ def url_input():
     return url
 
 
-def update_page_style():
+def on_clear():
 
-    with open("./style.html", "r") as f:
-        page_style = f.read()
+    url = st.session_state.url
 
-    st.markdown(page_style, unsafe_allow_html=True)
-
-
-def add_styled_text(text, tag, font_size, text_align):
-
-    st.markdown(f"<{tag} style='font-size: {font_size}; text-align: {text_align};'>{text}</{tag}>", unsafe_allow_html=True)
+    st.session_state.chat_history = [
+        {"role": "assistant", "content": f"The content of website '{url}' has been loaded. How can I help you?"},
+    ]
 
 
-def break_lines(n=1):
-    for _ in range(n):
-        st.text("")
+def on_question_asked(query):
+
+    st.session_state.chat_history.append({"role": "user", "content": query})
+
+    answer = chat.ask(st.session_state.url, query, st.session_state.chat_session_id)
+
+    st.session_state.chat_history.append({"role": "assistant", "content": answer})
 
 
 def show_chat_history():
@@ -103,13 +81,3 @@ def show_chat_history():
                 with st.chat_message(message["role"]):
 
                     st.write(message["content"])
-
-
-def ask(url, query):
-
-    return chat.ask(
-        url=url,
-        query=query,
-        session_id=st.session_state.chat_session_id,
-        chat_storage=st.session_state.chat_storage,
-    )
