@@ -1,5 +1,3 @@
-import httpx
-
 import hashlib
 
 from main import settings
