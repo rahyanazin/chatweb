@@ -17,6 +17,8 @@ The API has three endpoints:
 
 ## Initialization
 
+In the same directory as the `docker-compose.yml` file, there should also be a `.env` file that sets the environment variable `OPENAI_API_KEY`. The provided file `.env-example` can be used as a template for this set up.
+
 To initialize both services, run the following command:
 
 ```docker
