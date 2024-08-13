@@ -1,3 +1,5 @@
+import httpx
+
 import hashlib
 
 from main import settings
@@ -50,7 +52,7 @@ def index(url):
 
     url_collection_name = get_collection_name(url)
 
-    loader = WebBaseLoader(web_paths=[url], verify_ssl=False)
+    loader = WebBaseLoader(web_paths=[url])
 
     docs = loader.load()
 
