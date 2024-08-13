@@ -2,11 +2,11 @@ FROM python:3.9-slim
 
 WORKDIR /code
 
-COPY ./api /code
+COPY . /code
 
 # RUN pip install fastapi uvicorn
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 8000
 

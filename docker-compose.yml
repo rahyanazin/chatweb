@@ -1,11 +1,16 @@
-version: '3.8'
 services:
   api:
     build: ./api
+    container_name: api
     ports:
       - "8000:8000"
+    environment:
+      LANGCHAIN_TRACING_V2: ${LANGCHAIN_TRACING_V2}
+      LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
   app:
     build: ./app
+    container_name: app
     ports:
       - "8501:8501"
     depends_on:
