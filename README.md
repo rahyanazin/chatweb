@@ -24,7 +24,7 @@ docker-compose up --build
 ```
 
 ## Usage
-Both the API and app ports are exposed to the host machine.
+Both the API and APP ports are exposed to the host machine.
 
 After initialization, the API will be running at http://localhost:8000/docs#, as illustrated below:
 
