@@ -68,7 +68,7 @@ def show_chat_history():
 
     chat_history = st.session_state.get("chat_history", [])
 
-    with st.container(height=250, border=True):
+    with st.container(height=500, border=True):
 
         if len(chat_history) == 0:
 
