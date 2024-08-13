@@ -7,7 +7,7 @@ def create_session():
 
     api_endpoint = f"{settings.CHATWEB_API_URL}/create-session"
 
-    response = requests.get(api_endpoint)
+    response = requests.post(api_endpoint)
 
     response.raise_for_status()
 

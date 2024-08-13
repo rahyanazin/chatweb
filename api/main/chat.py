@@ -39,9 +39,8 @@ def get_rag_chain(url, chat_storage):
             ("human", "{input}"),
         ]
     )
-    history_aware_retriever = create_history_aware_retriever(
-        llm, retriever, contextualize_q_prompt
-    )
+
+    history_aware_retriever = create_history_aware_retriever(llm, retriever, contextualize_q_prompt)
 
     # Answer question #
     system_prompt = (

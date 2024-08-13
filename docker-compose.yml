@@ -5,13 +5,15 @@ services:
     ports:
       - "8000:8000"
     environment:
-      LANGCHAIN_TRACING_V2: ${LANGCHAIN_TRACING_V2}
-      LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY}
+      LANGCHAIN_TRACING_V2: false
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      USER_AGENT: mybotuseragent
   app:
     build: ./app
     container_name: app
     ports:
       - "8501:8501"
+    environment:
+      CHATWEB_API_URL: http://api:8000
     depends_on:
       - api

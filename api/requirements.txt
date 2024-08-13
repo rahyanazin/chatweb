@@ -1,3 +1,4 @@
+langchain-core==0.2.28  # to avoid the error described here https://github.com/langchain-ai/langchain/issues/24713
 langchain
 langchain_community
 langchain_chroma

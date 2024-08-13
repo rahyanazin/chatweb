@@ -8,22 +8,23 @@ from main import storage_chat_session
 
 from main import storage_websites_content
 
-app = FastAPI()
+
+app = FastAPI(title="Talk to your website API", swagger_ui_parameters={"defaultModelsExpandDepth": -1})
 
 
-@app.get("/create-session")
+@app.post("/create-session", tags=["chat"])
 def create_session() -> str:
 
     return storage_chat_session.create_session()
 
 
-@app.post("/index")
+@app.post("/index", tags=["chat"])
 def index(url: str = Form(default=None)):
 
     return storage_websites_content.index(url)
 
 
-@app.post('/ask')
+@app.post('/ask', tags=["chat"])
 def ask(
     url: str = Form(default=None),
     query: str = Form(default=None),
